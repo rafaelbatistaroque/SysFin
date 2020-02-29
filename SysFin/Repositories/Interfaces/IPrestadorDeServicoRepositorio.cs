@@ -12,6 +12,6 @@ namespace SysFin.Data.Repositories.Interfaces
         Task<PrestadorDeServico> ObterPrestadorPorIdNoBD(string id);
         Task AdicionarPrestadorNoBD(PrestadorDeServico prestador);
         Task DeletarPrestadorNoBD(PrestadorDeServico prestador);
-        Task AtualizarAlunoNoBD(PrestadorDeServico prestador);
+        Task AtualizarAlunoNoBD(PrestadorDeServico prestadorAtualizado);
     }
 }

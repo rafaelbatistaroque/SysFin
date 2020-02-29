@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "v1/PrestadorDeServico",
+      "launchUrl": "api/v1/PrestadorDeServico",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "SysFin": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "v1/PrestadorDeServico",
+      "launchUrl": "api/v1/PrestadorDeServico",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

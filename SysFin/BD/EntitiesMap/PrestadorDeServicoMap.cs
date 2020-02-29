@@ -19,10 +19,6 @@ namespace SysFin.Data.BD.EntitiesMap
             builder.Property(x => x.Descricao).HasMaxLength(100);
 
             builder.HasMany(x => x.Faturas).WithOne(x => x.Prestador).OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasData(
-                new PrestadorDeServico(nome: "Energisa", descricao: "Prestador de servico")
-            );
         }
     }
 }

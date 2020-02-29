@@ -2,6 +2,7 @@
 using SysFin.Data.BD;
 using SysFin.Data.Repositories.Interfaces;
 using SysFin.Domain.Entities;
+using SysFin.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,19 +19,33 @@ namespace SysFin.Data.Repositories
         }
 
 
-        public Task AdicionarPrestadorNoBD(PrestadorDeServico prestador)
+        public async Task AdicionarPrestadorNoBD(PrestadorDeServico prestador)
         {
-            throw new NotImplementedException();
+            prestador.Id = GuidService.NovoGuid();
+            BD.Add(prestador);
+            await BD.SaveChangesAsync();
         }
 
-        public Task AtualizarAlunoNoBD(PrestadorDeServico prestador)
+        public async Task AtualizarAlunoNoBD(PrestadorDeServico prestadorAtualizado)
         {
-            throw new NotImplementedException();
+            var prestadorLocalizado = await ObterPrestadorPorIdNoBD(prestadorAtualizado.Id);
+            if(prestadorLocalizado != null)
+            {
+                BD.Entry(prestadorLocalizado).CurrentValues.SetValues(prestadorAtualizado);
+                await BD.SaveChangesAsync();
+                return;
+            }
+            throw new Exception();
         }
 
-        public Task DeletarPrestadorNoBD(PrestadorDeServico prestador)
+        public async Task DeletarPrestadorNoBD(PrestadorDeServico prestador)
         {
-            throw new NotImplementedException();
+            var prestadorLocalizado = await BD.PrestadoresDeServico.FindAsync(prestador.Id);
+            if(prestadorLocalizado != null)
+            {
+                BD.Remove(prestador);
+                await BD.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<PrestadorDeServico>> ObterListaDePrestadoresNoBD()
@@ -38,9 +53,9 @@ namespace SysFin.Data.Repositories
             return await BD.PrestadoresDeServico.ToListAsync();
         }
 
-        public Task<PrestadorDeServico> ObterPrestadorPorIdNoBD(string id)
+        public async Task<PrestadorDeServico> ObterPrestadorPorIdNoBD(string id)
         {
-            throw new NotImplementedException();
+            return await BD.PrestadoresDeServico.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
     }
 }
